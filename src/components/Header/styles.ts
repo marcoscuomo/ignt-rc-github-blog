@@ -11,4 +11,8 @@ export const HeaderContent = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  img {
+    margin-bottom: 3.5rem;
+  }
 `
