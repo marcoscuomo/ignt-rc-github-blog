@@ -3,11 +3,11 @@ import { styled } from 'styled-components'
 export const ProfileContent = styled.div`
   background: ${(props) => props.theme['blue-500']};
   height: 13.25rem;
-  width: 80%;
+  width: 100%;
   max-width: 864px;
   padding: 2rem 3rem;
 
-  margin: -5.5rem auto;
+  margin: -5.5rem auto 0;
   border-radius: 10px;
 
   display: flex;
