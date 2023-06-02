@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
 `
 
-export const Content = styled.div`
+export const Main = styled.main`
   width: 864px;
   display: flex;
   flex-direction: column;

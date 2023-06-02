@@ -1,16 +1,18 @@
 import { Header } from '../../components/Header'
+import { Posts } from '../../components/Posts'
 import { Profile } from '../../components/Profile'
 import { SearchPublications } from '../../components/SearchPublications'
-import { Container, Content } from './styles'
+import { Container, Main } from './styles'
 
 export function Blog() {
   return (
     <Container>
       <Header />
-      <Content>
+      <Main>
         <Profile />
         <SearchPublications />
-      </Content>
+        <Posts />
+      </Main>
     </Container>
   )
 }
