@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import moment from '../../config/moment'
 import { ContainerPost, ContentPost, HeaderPost } from './styles'
 
@@ -14,7 +15,9 @@ export function Post({ title, createdAt, content }: PostProps) {
         <h3>{title}</h3>
         <span>{moment(createdAt).fromNow()}</span>
       </HeaderPost>
-      <ContentPost>{content}</ContentPost>
+      <ContentPost>
+        <Link to="/post/test">{content}</Link>
+      </ContentPost>
     </ContainerPost>
   )
 }

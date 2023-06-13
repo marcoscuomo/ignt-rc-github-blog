@@ -32,12 +32,15 @@ export const HeaderPost = styled.header`
 `
 
 export const ContentPost = styled.p`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  line-height: 25px;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  color: ${(props) => props.theme['gray-300']};
-  font-size: 1rem;
+  a {
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 25px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    color: ${(props) => props.theme['gray-300']};
+    font-size: 1rem;
+  }
 `
