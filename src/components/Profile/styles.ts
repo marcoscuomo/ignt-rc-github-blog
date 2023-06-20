@@ -14,6 +14,12 @@ export const ProfileContent = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 2.2rem;
+
+  .avatar {
+    width: 148px;
+    height: 148px;
+    border-radius: 8px;
+  }
 `
 
 export const ProfileInfo = styled.div`

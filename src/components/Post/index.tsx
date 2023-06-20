@@ -4,7 +4,7 @@ import { ContainerPost, ContentPost, HeaderPost } from './styles'
 
 interface PostProps {
   title: string
-  createdAt: number
+  createdAt: Date
   content: string
 }
 
@@ -13,7 +13,7 @@ export function Post({ title, createdAt, content }: PostProps) {
     <ContainerPost>
       <HeaderPost>
         <h3>{title}</h3>
-        <span>{moment(createdAt).fromNow()}</span>
+        <span>{moment(new Date(createdAt).getTime()).fromNow()}</span>
       </HeaderPost>
       <ContentPost>
         <Link to="/post/test">{content}</Link>

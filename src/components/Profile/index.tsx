@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import {
   ProfileAbout,
   ProfileContent,
@@ -5,45 +7,61 @@ import {
   ProfileInfo,
   ProfileTitle,
 } from './styles'
-import imgAvatar from '../../assets/avatar.png'
 import Anchor from '../../assets/anchor.svg'
 import IconGithub from '../../assets/icon-github.svg'
 import IconBuild from '../../assets/icon-build.svg'
 import IconFollowers from '../../assets/icon-followers.svg'
+import { api } from '../../lib/axios'
+
+interface IProfile {
+  name: string
+  bio: string
+  login: string
+  company: string
+  followers: number
+  avatar_url: string
+  html_url: string
+}
 
 export function Profile() {
+  const [profile, setProfile] = useState<IProfile>()
+
+  const fetchProfile = async () => {
+    const response = await api.get('users/marcoscuomo')
+    setProfile(response.data)
+  }
+
+  useEffect(() => {
+    fetchProfile()
+  }, [])
   return (
     <ProfileContent>
-      <img src={imgAvatar} alt="avatar" />
+      <img src={profile?.avatar_url} alt="avatar" className="avatar" />
       <ProfileInfo>
         <ProfileTitle>
-          <h1>Cameron Williamson</h1>
+          <h1>{profile?.name}</h1>
           <div>
             <span>github</span>
-            <a href="#" target="_blank">
+            <a href={profile?.html_url} target="_blank" rel="noreferrer">
               <img src={Anchor} alt="anchor link" />
             </a>
           </div>
         </ProfileTitle>
         <ProfileAbout>
-          <p>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </p>
+          <p>{profile?.bio}</p>
         </ProfileAbout>
         <ProfileFooter>
           <div>
             <img src={IconGithub} alt="IconGithub" />
-            <p>cameronwll</p>
+            <p>{profile?.login}</p>
           </div>
           <div>
             <img src={IconBuild} alt="IconBuild" />
-            <p>Rocketseat</p>
+            <p>{profile?.company}</p>
           </div>
           <div>
             <img src={IconFollowers} alt="IconFollowers" />
-            <p>32 seguidores</p>
+            <p>{profile?.followers} seguidores</p>
           </div>
         </ProfileFooter>
       </ProfileInfo>
