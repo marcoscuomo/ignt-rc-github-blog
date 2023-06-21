@@ -14,6 +14,8 @@ export function Posts() {
           content={issue.body}
           title={issue.title}
           createdAt={issue.created_at}
+          url={issue.url}
+          number={issue.number}
         />
       ))}
     </ContainerPosts>

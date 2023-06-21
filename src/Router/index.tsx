@@ -6,7 +6,7 @@ const Router = () => (
   <Routes>
     <Route path="/" element={<Blog />} />
     <Route path="/post">
-      <Route path=":slug" element={<Post />} />
+      <Route path=":issueNumber" element={<Post />} />
     </Route>
   </Routes>
 )

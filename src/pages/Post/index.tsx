@@ -1,4 +1,6 @@
-// import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import moment from '../../config/moment'
 import { Container, LinksFooter, Main, PostHeader } from './styles'
 import { Header } from '../../components/Header'
 import IconBack from '../../assets/icon-back.svg'
@@ -6,10 +8,35 @@ import IconAnchor from '../../assets/anchor.svg'
 import IconGithub from '../../assets/icon-github.svg'
 import IconCalender from '../../assets/icon-calender.svg'
 import IconComment from '../../assets/icon-comments.svg'
-import { Link } from 'react-router-dom'
+import { api } from '../../lib/axios'
+
+interface IUser {
+  login: string
+}
+
+interface IIssue {
+  html_url: string
+  title: string
+  comments: number
+  created_at: Date
+  body: string
+  user: IUser
+}
 
 export const Post = () => {
-  // const { slug } = useParams()
+  const { issueNumber } = useParams()
+  const [issue, setIssue] = useState<IIssue>()
+
+  useEffect(() => {
+    const fetchIssue = async () => {
+      const response = await api.get(
+        `https://api.github.com/repos/marcoscuomo/ignt-rc-github-blog/issues/${issueNumber}`,
+      )
+      setIssue(response.data)
+    }
+    fetchIssue()
+  }, [issueNumber])
+
   return (
     <Container>
       <Header />
@@ -22,34 +49,34 @@ export const Post = () => {
             </Link>
           </div>
           <div>
-            <a href="#" target="_blank">
+            <a href={issue?.html_url} target="_blank" rel="noreferrer">
               <span>Ver no Github</span>{' '}
               <img src={IconAnchor} alt="See Github" />
             </a>
           </div>
         </header>
-        <h1>JavaScript data types and data structures</h1>
+        <h1>{issue?.title}</h1>
         <LinksFooter>
           <div>
-            <img src={IconGithub} alt="Github" /> <span>cameronwll</span>
+            <img src={IconGithub} alt="Github" />{' '}
+            <span>{issue?.user.login}</span>
           </div>
           <div>
-            <img src={IconCalender} alt="Github" /> <span>Há 1 dia</span>
+            <img src={IconCalender} alt="Github" />{' '}
+            <span>
+              {issue
+                ? moment(new Date(issue.created_at).getTime()).fromNow()
+                : ''}
+            </span>
           </div>
           <div>
-            <img src={IconComment} alt="Github" /> <span>5 comentários</span>
+            <img src={IconComment} alt="Github" />{' '}
+            <span>{issue?.comments} comentários</span>
           </div>
         </LinksFooter>
       </PostHeader>
       <Main>
-        <p>
-          Programming languages all have built-in data structures, but these
-          often differ from one language to another. This article attempts to
-          list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn.
-        </p>
+        <p>{issue?.body}</p>
       </Main>
     </Container>
   )

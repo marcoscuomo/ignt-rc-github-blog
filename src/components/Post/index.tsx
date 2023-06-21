@@ -6,9 +6,11 @@ interface PostProps {
   title: string
   createdAt: Date
   content: string
+  url: string
+  number: number
 }
 
-export function Post({ title, createdAt, content }: PostProps) {
+export function Post({ title, createdAt, content, number }: PostProps) {
   return (
     <ContainerPost>
       <HeaderPost>
@@ -16,7 +18,7 @@ export function Post({ title, createdAt, content }: PostProps) {
         <span>{moment(new Date(createdAt).getTime()).fromNow()}</span>
       </HeaderPost>
       <ContentPost>
-        <Link to="/post/test">{content}</Link>
+        <Link to={`/post/${number}`}>{content}</Link>
       </ContentPost>
     </ContainerPost>
   )
