@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import ReactMarkdown from 'react-markdown'
 import moment from '../../config/moment'
 import { Container, LinksFooter, Main, PostHeader } from './styles'
 import { Header } from '../../components/Header'
@@ -75,9 +76,7 @@ export const Post = () => {
           </div>
         </LinksFooter>
       </PostHeader>
-      <Main>
-        <p>{issue?.body}</p>
-      </Main>
+      <Main>{issue ? <ReactMarkdown>{issue?.body}</ReactMarkdown> : ''}</Main>
     </Container>
   )
 }
